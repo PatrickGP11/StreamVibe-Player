@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamVibe Player</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="assets/icons8-música-16.png" type="image/music.png">
+</head>
+
+<body>
+
+    <header>
+        <div class="brand">
+            <i class="ri-mv-fill"></i> StreamVibe
+        </div>
+
+        <div class="nav-tabs">
+            <button class="active" onclick="switchTab('search')">Buscar</button>
+            <button onclick="switchTab('favorites')">Favoritos</button>
+        </div>
+
+        <div class="search-wrapper" id="searchWrapper">
+            <i class="ri-search-line search-icon"></i>
+            <input type="text" id="searchInput" placeholder="O que você quer ouvir?">
+
+            <button class="mic-btn" onclick="openSourceMenu()">
+                <i class="ri-mic-line"></i>
+            </button>
+        </div>
+    </header>
+
+    <main id="resultContainer">
+        <div class="empty-state">
+            <i class="ri-headphone-line"></i>
+            <p>Explore ou use o microfone para identificar músicas.</p>
+        </div>
+    </main>
+
+    <div id="sourceSelectionModal" class="listening-overlay hidden">
+        <div class="source-box">
+            <h3>Qual áudio identificar?</h3>
+
+            <p id="mobileWarning" style="display:none;">
+                <i class="ri-alert-line"></i> No celular, aumente o volume e use o <b>Microfone</b>.
+            </p>
+
+            <div class="source-buttons">
+                <button onclick="startMicRecording()">
+                    <i class="ri-mic-2-fill"></i>
+                    <span>Microfone</span>
+                    <small>(Ambiente / Celular)</small>
+                </button>
+
+                <button id="btnSystem" onclick="startSystemRecording()">
+                    <i class="ri-computer-line"></i>
+                    <span>Navegador</span>
+                    <small>(PC: YouTube / Spotify)</small>
+                </button>
+            </div>
+
+            <div class="proxy-notice">
+                <i class="ri-information-line"></i>
+                <p>
+                    Parou de funcionar?
+                    <a href="https://cors-anywhere.herokuapp.com/corsdemo" target="_blank">Clique aqui para reativar a
+                        permissão</a>
+                    (Necessário 1x por dia).
+                </p>
+            </div>
+            <button class="cancel-link" onclick="closeSourceMenu()">Cancelar</button>
+        </div>
+    </div>
+
+    <div id="listeningOverlay" class="listening-overlay hidden">
+        <div class="pulse-ring"></div>
+        <div class="pulse-icon">
+            <i class="ri-music-2-fill"></i>
+        </div>
+        <p>Ouvindo...</p>
+        <button onclick="cancelShazam()">Cancelar</button>
+    </div>
+
+    <div id="fullScreenPlayer" class="player-overlay hidden">
+        <div class="bg-blur" id="bgBlur"></div>
+
+        <div class="player-wrapper">
+            <div class="header-controls">
+                <button class="icon-btn" onclick="closePlayer()">
+                    <i class="ri-arrow-down-s-line"></i>
+                </button>
+                <span>Tocando Agora</span>
+                <button class="speed-btn" onclick="changeSpeed()" id="speedBtn">1x</button>
+            </div>
+
+            <div class="album-art-container">
+                <img id="playerImage" src="" alt="Capa">
+            </div>
+
+            <div class="track-info">
+                <div class="title-row">
+                    <h2 id="playerTitle">Título</h2>
+                    <button class="like-btn" onclick="toggleFavorite()">
+                        <i id="likeIcon" class="ri-heart-line"></i>
+                    </button>
+                </div>
+                <p id="playerArtist">Artista</p>
+            </div>
+
+            <div class="progress-area">
+                <input type="range" id="progressBar" value="0" min="0" max="100" step="0.1">
+                <div class="time-labels">
+                    <span id="currentTime">0:00</span>
+                    <span id="duration">0:30</span>
+                </div>
+            </div>
+
+            <div class="main-controls">
+                <button class="control-btn sm"><i class="ri-skip-back-fill"></i></button>
+                <button class="control-btn play-btn" onclick="togglePlay()">
+                    <i id="playIcon" class="ri-play-fill"></i>
+                </button>
+                <button class="control-btn sm"><i class="ri-skip-forward-fill"></i></button>
+            </div>
+        </div>
+
+        <audio id="audioElement"></audio>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
