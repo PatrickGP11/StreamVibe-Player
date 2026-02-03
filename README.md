@@ -72,7 +72,7 @@ Para que o reconhecimento funcione sem um servidor Backend (backend-less), utili
 
 * **Design:** Inspirado em tendências de Glassmorphism e interfaces modernas de streaming.
 * **Ícones:** [RemixIcon](https://remixicon.com/).
-* **Desenvolvimento:** [Seu Nome Aqui]
+* **Desenvolvimento:** [Patrick Gonçalves]
 
 ---
 
